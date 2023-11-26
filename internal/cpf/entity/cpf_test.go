@@ -25,7 +25,7 @@ func TestRegexCpf(t *testing.T) {
 }
 
 func TestPeso(t *testing.T) {
-	cpf := "14538220620"
+	cpf := "51365179052"
 	peso1, peso2 := SomarPesos(cpf)
 	esperado1 := 185
 	esperado2 := 220
@@ -43,7 +43,7 @@ func TestCalcularDigito(t *testing.T) {
 	peso2 := 220
 	cpf := "14538220620"
 
-	esperado1, esperado2 := SepararDigitoDoCpfInformado(cpf)
+	esperado1, esperado2 := SepararDigito(cpf)
 	digito1, digito2 := CalcularDigito(peso1, peso2)
 
 	if digito1 != esperado1 {
@@ -59,7 +59,7 @@ func TestValidarCpf(t *testing.T) {
 	cpf := "15776285860"
 	peso1, peso2 := SomarPesos(cpf)
 	digito1, digito2 := CalcularDigito(peso1, peso2)
-	esperado1, esperado2 := SepararDigitoDoCpfInformado(cpf)
+	esperado1, esperado2 := SepararDigito(cpf)
 	if digito1 != esperado1 {
 		t.Errorf("esperado1 %s , resultado1 %s", esperado1, digito1)
 	}
@@ -79,7 +79,7 @@ func TestCpf(t *testing.T) {
 
 	t.Run("validar cpf", func(t *testing.T) {
 		cpf := "81499852045"
-		digitoEsperado1, digitoEsperado2 := SepararDigitoDoCpfInformado(cpf)
+		digitoEsperado1, digitoEsperado2 := SepararDigito(cpf)
 		peso1, peso2 := SomarPesos(cpf)
 		digito1Calculado1, digitoCalculado2 := CalcularDigito(peso1, peso2)
 		validaCpf(t, digitoEsperado1, digitoEsperado2, digito1Calculado1, digitoCalculado2)
@@ -87,7 +87,7 @@ func TestCpf(t *testing.T) {
 
 	t.Run("validar cpf", func(t *testing.T) {
 		cpf := "46885462039"
-		digitoEsperado1, digitoEsperado2 := SepararDigitoDoCpfInformado(cpf)
+		digitoEsperado1, digitoEsperado2 := SepararDigito(cpf)
 		peso1, peso2 := SomarPesos(cpf)
 		digito1Calculado1, digitoCalculado2 := CalcularDigito(peso1, peso2)
 		validaCpf(t, digitoEsperado1, digitoEsperado2, digito1Calculado1, digitoCalculado2)
@@ -95,7 +95,7 @@ func TestCpf(t *testing.T) {
 
 	t.Run("validar cpf", func(t *testing.T) {
 		cpf := "13830579071"
-		digitoEsperado1, digitoEsperado2 := SepararDigitoDoCpfInformado(cpf)
+		digitoEsperado1, digitoEsperado2 := SepararDigito(cpf)
 		peso1, peso2 := SomarPesos(cpf)
 		digito1Calculado1, digitoCalculado2 := CalcularDigito(peso1, peso2)
 		validaCpf(t, digitoEsperado1, digitoEsperado2, digito1Calculado1, digitoCalculado2)
@@ -107,13 +107,13 @@ func TestArrayCpf(t *testing.T) {
 	validaCpf := func(t *testing.T, cpf string) {
 		t.Helper()
 
-		err := ValidarCpf(cpf)
+		err := Validar(cpf)
 
 		if err != nil {
 			t.Errorf("CPF inválido, %s", err)
 		}
 
-		digitoEsperado1, digitoEsperado2 := SepararDigitoDoCpfInformado(cpf)
+		digitoEsperado1, digitoEsperado2 := SepararDigito(cpf)
 		peso1, peso2 := SomarPesos(cpf)
 		digito1Calculado1, digitoCalculado2 := CalcularDigito(peso1, peso2)
 

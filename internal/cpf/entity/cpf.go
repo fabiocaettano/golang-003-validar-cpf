@@ -7,20 +7,28 @@ import (
 	"strings"
 )
 
-func ValidarCpf(cpf string) error {
+type CPF struct {
+	numero string
+}
 
-	if cpf == "" {
+func Validar(input string) error {
+
+	cpf := CPF{
+		numero: input,
+	}
+
+	if cpf.numero == "" {
 		return errors.New("Informar o CPF")
 	}
 
-	if len(cpf) != 11 {
+	if len(cpf.numero) != 11 {
 		return errors.New("CPF deve conter 11 digitos")
 	}
 
 	pattern := regexp.MustCompile("[0-9]+")
-	resultado := pattern.FindAllString(cpf, -1)
+	resultado := pattern.FindAllString(cpf.numero, -1)
 
-	if cpf != resultado[0] {
+	if cpf.numero != resultado[0] {
 		return errors.New("CPF deve conter somente números")
 	}
 
@@ -28,7 +36,12 @@ func ValidarCpf(cpf string) error {
 }
 
 func ValidarDigito(cpf string) bool {
-	digitoEsperado1, digitoEsperado2 := SepararDigitoDoCpfInformado(cpf)
+
+	err := Validar(cpf)
+	if err != nil {
+		panic(err)
+	}
+	digitoEsperado1, digitoEsperado2 := SepararDigito(cpf)
 	peso1, peso2 := SomarPesos(cpf)
 	digito1Calculado1, digitoCalculado2 := CalcularDigito(peso1, peso2)
 	if digitoEsperado1 != digito1Calculado1 || digitoEsperado2 != digitoCalculado2 {
@@ -37,7 +50,7 @@ func ValidarDigito(cpf string) bool {
 	return true
 }
 
-func SepararDigitoDoCpfInformado(cpf string) (string, string) {
+func SepararDigito(cpf string) (string, string) {
 	digito := cpf[9:]
 	arrayDigito := strings.Split(digito, "")
 	digito1 := arrayDigito[0]
@@ -58,7 +71,6 @@ func CalcularDigito(peso1 int, peso2 int) (string, string) {
 }
 
 func SomarPesos(cpf string) (int, int) {
-
 	soma1 := 0
 	contador1 := 0
 	arrayCpf1 := strings.Split(cpf[:9], "")
