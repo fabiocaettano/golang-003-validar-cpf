@@ -23,24 +23,23 @@ CPF utilizado no exemplo: 51365179052
 | Total: 215  | Total: 262   |
 
 2. O próximo passo é descobrir o resto da divisão.
-215 / 11 = 19,545454
-215 - (19 * 11) = 6
-O resto dessa divisão é 6.
 
-262 / 11 = 23,818181
-262 - (23 * 11) = 9
+| Resto 1              | Resto 2               |
+------------------------------------------------
+| 215 / 11 = 19,545454 | 262 / 11 = 23,818181  |
+| 215 - (19 * 11) = 6  | 262 - (23 * 11) = 9   |
 
-3. Agora subtrair o resto da divisão por 11.
-11 - 6 = 5 
-11 - 9 = 2
 
-4. Validar
+3. Agora subtrair 11 do resto da divisão, para descobrir o digito verificador.
 
-| Posiçao   | Digito |  Subtração   | 
-|-----------|--------|--------------|
-| Penúltimo |    5   |   11 - 6 = 5 |
-| Último    |    2   |   11 - 9 = 2 |
+| Penúltimo Digito | Último Digito   |
+|------------------|------------------
+| 11 - 6 = 5       | 11 - 9 = 2      | 
 
+
+4. Resto da divisão maior ou igual a 10.
+
+Caso o resto da divisão for maior ou igual a 10, o resto deverá ser igual a zero.
 
 
 ## Executar aplicação
